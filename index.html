@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<!-- Añadimos la clase 'scroll-smooth' y preparamos para dark mode -->
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="https://img.freepik.com/vector-premium/icono-apagon-apagando-luces-ilustracion-vectorial-plana_124715-4240.jpg" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apagón Masivo en Europa: Análisis del 'Cero Energético', Impacto y Reflexiones</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Fuentes: Merriweather para cuerpo, Lato para títulos/UI -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script>
+        // Configuración Tailwind para Dark Mode y Fuentes
+        tailwind.config = {
+          darkMode: 'class',
+          theme: {
+            extend: {
+              fontFamily: {
+                'sans': ['Lato', 'sans-serif'],
+                'serif': ['Merriweather', 'serif'],
+              },
+              colors: {
+                 // Paleta mejorada para modo claro y oscuro
+                 primary: { DEFAULT: '#4f46e5', light: '#6366f1', dark: '#818cf8' }, // Indigo
+                 danger:  { DEFAULT: '#dc2626', light: '#ef4444', dark: '#f87171' }, // Red
+                 warning: { DEFAULT: '#f59e0b', light: '#facc15', dark: '#fcd34d' }, // Amber/Yellow
+                 success: { DEFAULT: '#16a34a', light: '#22c55e', dark: '#4ade80' }, // Green
+                 info:    { DEFAULT: '#2563eb', light: '#3b82f6', dark: '#60a5fa' }  // Blue
+              },
+              // Sombra sutil para texto "luminoso" en modo oscuro (opcional)
+              textShadow: {
+                'glow-primary-dark': '0 0 8px rgba(129, 140, 248, 0.5)', // Glow para indigo-400
+                'glow-danger-dark': '0 0 8px rgba(248, 113, 113, 0.5)', // Glow para red-400
+              }
+            }
+          }
+        }
+    </script>
+    <style>
+        /* Estilos Base y Dark Mode */
+        :root {
+            color-scheme: light dark; /* Indica soporte nativo para temas */
+        }
+        html.dark { color-scheme: dark; }
+        html:not(.dark) { color-scheme: light; }
+
+        body {
+            font-family: 'Merriweather', serif;
+            @apply bg-gray-50 dark:bg-gray-950 text-gray-800 dark:text-gray-300 leading-relaxed transition-colors duration-300 text-lg; /* Texto base más grande */
+        }
+        /* Títulos y UI */
+        h1, h2, h3, h4, h5, h6, nav, button, .font-ui, figcaption, footer {
+            font-family: 'Lato', sans-serif;
+        }
+
+        
+
+
+
+
+
+
+        /* Estilos personalizados para encabezados con negritas y emojis */
+.subsection-title {
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase; /* Convertir en mayúsculas */
+}
+
+/* Tamaños personalizados con negritas y espaciado */
+h1 {
+    font-size: 48px;
+    font-weight: bold;
+
+    margin-bottom: 16px;
+
+}
+
+h2 {
+    font-size: 36px;
+    font-weight: bold;
+
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+}
+
+h3 {
+    font-size: 28px;
+    font-weight: bold;
+
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+/* Ajustes para los párrafos */
+p {
+    font-size: 18px;
+    line-height: 1.6; /* Espaciado entre líneas */
+    margin-bottom: 8px;
+    text-align: justify;
+}
+
+/* Estilos adaptativos para móviles */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 36px;
+    }
+    h2 {
+        font-size: 30px;
+    }
+    h3 {
+        font-size: 24px;
+    }
+    p {
+        font-size: 16px;
+    }
+}
+
+/* Espaciado entre emoji y texto */
+h1::before, h2::before, h3::before {
+    content: "🔥 "; /* Emoji predeterminado */
+    margin-right: 8px;
+}
+
+/* Estilos adaptativos para móviles */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 36px;
+    }
+    h2 {
+        font-size: 30px;
+    }
+    h3 {
+        font-size: 24px;
+    }
+    p {
+        font-size: 16px;
+    }
+}
+        .keyword {
+            /* Usando colores definidos en config. Amarillo brillante en dark mode */
+            @apply font-semibold text-primary-DEFAULT dark:text-yellow-300 dark:font-bold;
+            /* Opcional: añadir sombra para efecto glow en dark mode */
+             /* @apply dark:text-shadow-glow-primary-dark; */
+        }
+        .graphic-placeholder {
+             @apply bg-gray-200 dark:bg-gray-800 border border-dashed border-gray-400 dark:border-gray-600 text-gray-600 dark:text-gray-400 font-ui;
+             display: flex; flex-direction: column; align-items: center; justify-content: center;
+             text-align: center; padding: 1.5rem; border-radius: 0.5rem; min-height: 200px;
+             font-style: italic; margin-top: 1.5rem; margin-bottom: 1.5rem;
+        }
+        .icon {
+          display: inline-block;
+          width: 1.3em; /* Iconos ligeramente más grandes */
+          height: 1.3em;
+          margin-right: 0.5em;
+          vertical-align: -0.3em; /* Ajuste vertical */
+        }
+        .media-container {
+            margin-top: 2rem; /* Aumentado */
+            margin-bottom: 2rem;
+        }
+        figure { margin: 0; } /* Reset de margen para figure */
+
+        /* Estilo para imágenes y videos dentro de figure */
+        figure img, figure video, figure iframe {
+            @apply max-w-full h-auto rounded-lg shadow-lg mx-auto block transition-transform duration-300 ease-in-out hover:scale-[1.02];
+        }
+        figcaption.media-caption {
+            @apply text-center text-base text-gray-600 dark:text-gray-400 mt-3 font-ui; /* Texto de caption más grande */
+        }
+        .section-divider {
+             @apply border-t border-gray-300 dark:border-gray-700 pt-10 mt-12; /* Más espacio */
+        }
+        h2 { /* Títulos de sección */
+             @apply text-1xl lg:text-4xl font-bold mb-6 text-gray-900 dark:text-gray-100 flex items-center;
+        }
+        h3.subsection-title { /* Subtítulos */
+            @apply text-2xl lg:text-3xl font-semibold mt-10 mb-5 text-gray-800 dark:text-gray-200;
+        }
+        ul { /* Estilo de listas mejorado */
+             @apply list-outside ml-6 space-y-3 text-lg;
+        }
+        li::marker { /* Color de los puntos de lista */
+            @apply text-primary-DEFAULT dark:text-primary-dark;
+        }
+        .source-link {
+            @apply text-primary-DEFAULT dark:text-primary-dark font-medium hover:underline hover:text-primary-light dark:hover:text-indigo-300 transition-colors duration-200;
+        }
+
+        /* Estilos para el botón de modo oscuro */
+        #darkModeToggle svg {
+            @apply w-5 h-5;
+        }
+        /* Estilos para las cajas de información */
+        .info-box {
+             @apply p-6 rounded-lg border-l-4 transition-all duration-300 ease-in-out hover:shadow-xl hover:scale-[1.03] hover:-translate-y-1;
+        }
+        .info-box h3 {
+             @apply text-xl font-bold mb-3 flex items-center;
+        }
+        .info-box h3 .icon { @apply mr-2; } /* Espacio icono en h3 */
+        .info-box ul {
+            @apply list-none ml-0 text-base space-y-2; /* Sin puntos, texto normal */
+        }
+        .info-box li { @apply pl-1; } /* Indentación ligera */
+
+        /* Clases específicas para los colores de las cajas (con borde izquierdo) */
+        .info-box-red { @apply bg-red-50 dark:bg-red-950/50 border-danger-DEFAULT dark:border-danger-dark text-gray-700 dark:text-gray-300; }
+        .info-box-red h3 { @apply text-danger-DEFAULT dark:text-danger-light; }
+
+        .info-box-yellow { @apply bg-yellow-50 dark:bg-yellow-950/50 border-warning-DEFAULT dark:border-warning-dark text-gray-700 dark:text-gray-300; }
+        .info-box-yellow h3 { @apply text-warning-DEFAULT dark:text-warning-light; }
+
+        .info-box-blue { @apply bg-blue-50 dark:bg-blue-950/50 border-info-DEFAULT dark:border-info-dark text-gray-700 dark:text-gray-300; }
+        .info-box-blue h3 { @apply text-info-DEFAULT dark:text-info-light; }
+
+        .info-box-green { @apply bg-green-50 dark:bg-green-950/50 border-success-DEFAULT dark:border-success-dark text-gray-700 dark:text-gray-300; }
+        .info-box-green h3 { @apply text-success-DEFAULT dark:text-success-light; }
+
+        /* Efecto "luminoso" en texto keyword para dark mode si se desea (alternativa a color brillante) */
+        /* .dark .keyword { text-shadow: 0 0 8px theme('colors.indigo.400/50%'); } */
+
+    </style>
+</head>
+<body><!-- Contenedor Principal Ancho 90%, Máximo 7xl -->
+<div class="mx-auto w-[90%] max-w-7xl my-10 font-serif"> <!-- Aplicar fuente serif por defecto aquí -->
+
+<!-- Menú de Navegación Mejorado -->
+<nav class="bg-gradient-to-r from-indigo-700 to-purple-800 dark:from-indigo-900 dark:to-purple-950 text-white p-3 md:p-4 rounded-t-lg shadow-lg mb-0 sticky top-0 z-50 transition-all duration-300">
+    <div class="flex justify-between items-center px-2 md:px-6 max-w-7xl mx-auto">
+        <!-- Enlace Informativo -->
+        <div class="flex-1 text-left">
+            <a href="#" class="hover:text-indigo-200 dark:hover:text-indigo-300 font-semibold text-lg md:text-xl transition-colors duration-300 font-ui">
+                ⚡ Detalles sobre el Apagón ⚡
+            </a>
+        </div>
+
+       <!-- Imagen con enlace a LinkedIn -->
+<div class="flex flex-1 justify-center items-center">
+    <a href="https://www.linkedin.com/in/juancitope%C3%B1a/" target="_blank" rel="noopener noreferrer">
+        <img id="userAvatar" 
+            class="h-12 w-12 md:h-14 md:w-14 rounded-full border-2 border-white/80 dark:border-indigo-300/80 shadow-md cursor-pointer mx-auto" 
+            src="https://avatars.githubusercontent.com/u/38921558?v=4" 
+            alt="Avatar Usuario">
+    </a>
+</div>
+
+        <!-- Botón Modo Oscuro/Claro -->
+        <div class="flex-1 text-right">
+            <button id="darkModeToggle" aria-label="Cambiar modo claro/oscuro"
+                class="p-2 rounded-full hover:bg-white/20 dark:hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/50 transition-colors duration-300">
+                <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6 hidden text-yellow-300">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-6.364-.386 1.591-1.591M3 12h2.25m.386-6.364 1.591 1.591M12 12a6 6 0 1 1-12 0 6 6 0 0 1 12 0Z" />
+                </svg>
+                <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6 hidden text-indigo-200">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</nav>
+
+    <!-- Contenido del Artículo -->
+    <article
+        class="bg-white dark:bg-gray-900 p-6 md:p-10 lg:p-16 rounded-b-lg shadow-xl transition-colors duration-300">
+
+        <header class="mb-12 border-b border-gray-300 dark:border-gray-700 pb-8">
+            <h1
+                class="text-4xl md:text-5xl lg:text-6xl font-black text-center text-danger-DEFAULT dark:text-danger-light mb-5 leading-tight font-sans">
+                Apagón Masivo Sacude Europa: El <span class="keyword">'Cero Energético'</span> que Dejó Sin Luz a España
+                y Portugal 🌍⚡</h1>
+                <p class="text-center text-gray-600 dark:text-gray-400 text-xl font-ui mb-3 flex items-center justify-center">
+                    🔍 <strong>Análisis del evento del 28 de Abril de 2025</strong>: sus causas, impacto y lecciones aprendidas. 📊
+                </p>
+                <p class="text-center text-base text-gray-500 dark:text-gray-500 mt-2 font-ui flex items-center justify-center">
+                    🗓️ <strong>Fecha de publicación:</strong> 28 de Abril, 2025
+                </p>
+                <p class="text-center text-gray-500 dark:text-gray-500 mt-2 font-ui flex items-center justify-center" 
+                style="font-size: 26px; word-spacing: 8px; letter-spacing: 2px; white-space: nowrap;">
+                 📑 <strong>Fuente de investigación:</strong> 
+                 <a href="https://aistudio.google.com/" target="_blank" class="text-indigo-500 font-semibold" style="margin-left: 10px; margin-right: 10px;">
+                     Google AI Studio
+                 </a>  
+                 y  
+                 <a href="https://notebooklm.google.com/" target="_blank" class="text-purple-500 font-semibold" style="margin-left: 10px; margin-right: 10px;">
+                     Notebook LM
+                 </a>  
+                 📡
+             </p>
+        </header>
+
+        <!-- SECCIÓN QUÉ SUCEDIÓ -->
+        <section class="mb-12">
+            <h2 style="font-size: 42px;" class="text-gray-900 dark:text-gray-100"><svg class="icon text-primary-DEFAULT dark:text-primary-dark"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+
+                </svg>¿Qué Sucedió? El Incidente del <span class="keyword ml-2">'Cero Energético'</span></h2>
+                <br>
+                <img src="img/apagon.png" alt="" style="display: block; margin: auto;">
+                <br>
+            <p class="mb-5">
+
+                El lunes, 28 de abril de 2025, un <strong class="keyword">corte de suministro eléctrico</strong> sin
+                precedentes, denominado <strong class="keyword">'cero energético'</strong> por los operadores, afectó a
+                toda la península Ibérica (España y Portugal) y a partes significativas de Francia. Se reportaron
+                también afectaciones breves en Italia y potencialmente en otros países europeos como Alemania y Andorra.
+                Las islas Baleares y Canarias, sin embargo, no parecieron verse afectadas directamente por este evento.
+            </p>
+            <p class="mb-5">
+                El apagón se inició cerca de las 12:30 p.m. hora local española (11:33 a.m. en Portugal), sumiendo a
+                millones de personas en la oscuridad y generando un <strong class="keyword">caos generalizado</strong>.
+                Las autoridades confirmaron rápidamente la magnitud del incidente.
+            </p>
+            <figure class="media-container">
+                <img src="https://s1.elespanol.com/2025/04/28/actualidad/1003743734181_255151594_1706x960.jpg"
+                    alt="Sala de control durante el apagón"
+                    onerror="this.onerror=null; this.src='https://placehold.co/800x450/e5e7eb/6b7280?text=Imagen+no+disponible'; this.alt='Placeholder: Imagen no disponible'">
+                <figcaption class="media-caption">Sala de control de Red Eléctrica durante el incidente. (Fuente: El
+                    Español)</figcaption>
+            </figure>
+            <p class="mb-5">
+                Las consecuencias inmediatas fueron severas: <strong class="keyword">paralización del transporte
+                    público</strong> (metro, trenes), <strong class="keyword">grandes atascos</strong> por semáforos
+                inoperativos, <strong class="keyword">retrasos en vuelos</strong> y la interrupción de comunicaciones
+                esenciales.
+            </p>
+            <figure class="media-container">
+                <img src="https://media.cnn.com/api/v1/images/stellar/prod/gettyimages-2211882483-20250428171145419.jpg?c=original&q=w_1280,c_fill"
+                    alt="Personas caminando en túnel oscuro durante apagón">
+                <figcaption class="media-caption">La gente camina por la calle Gran Vía en Madrid, donde el tráfico fue
+                    cortado, ya que el metro y los trenes quedaron fuera de servicio. (Thomas Coex/AFP/Getty Images)
+                </figcaption>
+            </figure>
+        </section>
+
+
+        <hr>
+        <br>
+<!-- SECCIÓN INVESTIGANDO CAUSAS -->
+<section class="mb-12">
+    <h2 style="font-size: 32px; text-align: justify;">
+        <svg class="icon text-primary-DEFAULT dark:text-primary-dark" xmlns="http://www.w3.org/2000/svg"
+            fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+        </svg>
+        Investigando las Causas: ¿Fallo Técnico o <span class="keyword ml-2">Ciberataque</span>?
+    </h2>
+    <br>
+    <img src="img/Screenshot_368.png" alt="" style="display: block; margin: auto;">
+    <br>
+    <p style="text-align: justify;" class="mb-5">
+        La causa exacta del <strong class="keyword">apagón masivo</strong> sigue bajo investigación, aunque las
+        hipótesis principales apuntan a:
+    </p>
+    <ul class="mb-6" style="text-align: justify; list-style: none; padding-left: 1em;">
+        <li>✅ <strong class="keyword">Fallo Técnico en la Red Española:</strong> 
+            <strong class="keyword">Red Eléctrica de España (REE)</strong>, el operador del sistema, informó que el incidente se debió a una 
+            <strong class="keyword">"oscilación muy fuerte del flujo de potencia de redes, de origen desconocido"</strong>. 
+            Esto provocó la desconexión (o "islanding") del sistema eléctrico peninsular del resto de Europa. 
+            El primer ministro portugués también señaló que el origen probable estaba en España.
+        </li>
+        <br>
+        <li>✅ <strong class="keyword">Condiciones Extremas y Demanda:</strong> 
+            Se baraja la posibilidad de un <strong class="keyword">fenómeno atmosférico</strong> inusual o variaciones extremas de temperatura, 
+            que incrementaron drásticamente la demanda energética, sumado a posibles <strong class="keyword">fallos en la infraestructura</strong> 
+            por falta de mantenimiento o condiciones climáticas adversas (tormentas). 
+            Se reportó una caída abrupta de la demanda gestionada de unos 11.000 a 12.500 MW en el momento del incidente.
+        </li>
+        <br>
+        <li>✅ <strong class="keyword">Hipótesis de Ciberataque:</strong> 
+            Aunque inicialmente descartada por algunos funcionarios europeos, la posibilidad de un 
+            <strong class="keyword">ciberataque</strong> coordinado a gran escala contra la red europea no se ha eliminado por completo. 
+            Organismos de ciberseguridad en España (INCIBE) y Portugal (CNCS), junto con servicios de inteligencia, 
+            están investigando esta vía.
+        </li>
+    </ul>
+    <hr>
+    <br>
+    <div class="graphic-placeholder text-center">
+        <img src="https://cadenaser.com/resizer/v2/HRS4PSXPZJCLTAGRBJSRCWFRHQ.png?auth=4d4462a61d92d52ea20e10d9e1e78128e745b855b758c239474aaabaf89762c6&quality=70&width=1200&height=675&smart=true"
+            alt="Evolución del apagón eléctrico en España" class="mx-auto">
+        <p style="text-align: justify; margin-top: 1em;">
+            El diario <em>El País</em> publicó gráficos interactivos mostrando la evolución de la demanda eléctrica, 
+            la frecuencia de la red y otros indicadores clave durante el apagón.
+        </p>
+        <a href="https://cadenaser.com/nacional/2025/04/28/espana-sufre-un-apagon-electrico-masivo-en-todo-el-pais-cadena-ser/"
+            target="_blank" rel="noopener noreferrer" class="mt-3 font-ui source-link">🔗 Ver gráficos en El País</a>
+        <br><small class="mt-2">(Descripción basada en el artículo de El País)</small>
+    </div>
+
+    <p style="text-align: justify;" class="mt-6">
+        La Comisión Europea colabora estrechamente con España y Portugal para esclarecer las causas y coordinar
+        la respuesta, asegurando el cumplimiento de los protocolos europeos de 
+        <strong class="keyword">restablecimiento del suministro</strong>.
+    </p>
+
+    <p style="text-align: justify;" class="mt-6">
+        La propia Red Eléctrica ha informado sobre las 13:30 que se ha "empezado a recuperar tensión por el
+        norte y sur peninsular, clave para atender progresivamente el suministro de electricidad". 
+        Más de diez horas después, <strong>el presidente del Gobierno, Pedro Sánchez, anunciaba el restablecimiento de casi el 50% del suministro.</strong>
+    </p>
+
+    <figure class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 media-container mt-6">
+        <img src="https://img.asmedia.epimg.net/resizer/v2/45KNJNMPEDCGGMYP42BPRRRTGQ.jpg?auth=5fb59dd2e4a96424aff1ececc32f6fdfc6af6717cad895ca762cc5f31f6c3c34&width=644&height=362&smart=true"
+            alt="Calle con tráfico congestionado"
+            onerror="this.onerror=null; this.src='https://placehold.co/600x400/e5e7eb/6b7280?text=Imagen+No+Disponible';"
+            class="w-[600px] h-[400px] object-cover mx-auto">
+        <img src="https://img.asmedia.epimg.net/resizer/v2/CE5AUATRRGPGVASB2ZSRHLHAWE.jpg?auth=cdab89a48f3c2017d392e692d079e85b21814390a0bd48fc09779498035d2379&width=644&height=362&smart=true"
+            alt="Personas esperando fuera de estación de metro"
+            onerror="this.onerror=null; this.src='https://placehold.co/600x400/e5e7eb/6b7280?text=Imagen+No+Disponible';"
+            class="w-[600px] h-[400px] object-cover mx-auto">
+        <img src="https://images.ecestaticos.com/omDwDz61SUvacxFS-1oDJnbPocA=/0x0:2272x1518/1338x752/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F23e%2F3ea%2F00b%2F23e3ea00b4fd5d8a5c88929cc2d9dc5a.jpg"
+            alt="Tienda a oscuras con gente fuera"
+            onerror="this.onerror=null; this.src='https://placehold.co/600x400/e5e7eb/6b7280?text=Imagen+No+Disponible';"
+            class="w-[600px] h-[400px] object-cover mx-auto">
+        <figcaption class="media-caption sm:col-span-2 md:col-span-3 text-center mt-2">
+            📷 Se va a trabajar a destajo, durante toda la noche. Con profesionalidad y compromiso.
+        </figcaption>
+    </figure>
+</section>
+
+<hr>
+<br>
+            <!-- SECCIÓN IMPACTO GENERALIZADO (CORREGIDA) -->
+            <section class="mb-12">
+                <h2 style="font-size: 32px;"><svg class="icon text-primary-DEFAULT dark:text-primary-dark" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" /></svg>Impacto Generalizado: Del Caos Urbano a la Economía</h2>
+                <!-- Ya no hay párrafo introductorio repetido aquí -->
+                 <figure class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 media-container">
+                     <img src="https://ichef.bbci.co.uk/ace/ws/800/cpsprodpb/8c97/live/304abe70-244a-11f0-a94b-5dd27bd31919.jpg.webp" alt="Calle con tráfico congestionado" onerror="this.onerror=null; this.src='https://placehold.co/600x400/e5e7eb/6b7280?text=Imagen+BBC+1'; this.alt='Placeholder: Imagen no disponible'" class="w-full h-auto">
+                     <img src="https://ichef.bbci.co.uk/ace/ws/800/cpsprodpb/98e2/live/dafdb7a0-2436-11f0-8c2e-77498b1ce297.jpg.webp" alt="Personas esperando fuera de estación de metro" onerror="this.onerror=null; this.src='https://placehold.co/600x400/e5e7eb/6b7280?text=Imagen+BBC+2'; this.alt='Placeholder: Imagen no disponible'" class="w-full h-auto">
+                     <img src="https://ichef.bbci.co.uk/ace/ws/800/cpsprodpb/7cc5/live/a1c9c560-243f-11f0-b26b-ab62c890638b.jpg.webp" alt="Tienda a oscuras con gente fuera" onerror="this.onerror=null; this.src='https://placehold.co/600x400/e5e7eb/6b7280?text=Imagen+BBC+3'; this.alt='Placeholder: Imagen no disponible'" class="w-full h-auto hidden md:block">
+                    <figcaption class="media-caption sm:col-span-2 md:col-span-3">Escenas del caos en ciudades afectadas: tráfico, transporte público y comercios. (Fuente: BBC)</figcaption>
+                </figure>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8"> 
+                    <div class="info-box info-box-red">
+                        <h3 style="font-size: 25px;"><span class="icon">🚦</span> Transporte y Movilidad</h3>
+                        <ul>
+                            <li>Caos vehicular por <strong class="keyword">semáforos apagados</strong>.</li>
+                            <li>Interrupción total de servicios de <strong class="keyword">Metro</strong> en Madrid, Lisboa y Oporto (con evacuaciones).</li>
+                            <li>Suspensión de todos los servicios de <strong class="keyword">tren</strong> en España.</li>
+                            <li><strong class="keyword">Retrasos en aeropuertos</strong>, aunque operativos con sistemas de contingencia.</li>
+                        </ul>
+                    </div>
+                    <div class="info-box info-box-yellow">
+                         <h3 style="font-size: 25px;"><span class="icon">📱</span> Comunicaciones y Servicios</h3>
+                        <ul>
+                            <li>Caídas masivas de <strong class="keyword">Internet y datos móviles</strong> (incluyendo 5G).</li>
+                            <li>Dificultades en llamadas de emergencia.</li>
+                            <li>Fallos en sistemas domésticos (alarmas, electrodomésticos).</li>
+                            <li>Personas atrapadas en ascensores (más de 140 rescates en España).</li>
+                        </ul>
+                    </div>
+                    <div class="info-box info-box-blue">
+                         <h3 style="font-size: 25px;"><span class="icon">🏥</span> Servicios Esenciales y Economía</h3>
+                        <ul>
+                            <li>Hospitales operando con <strong class="keyword">generadores de respaldo</strong>, aunque con saturación inicial.</li>
+                            <li>Cierre de <strong class="keyword">comercios y negocios</strong>, con pérdidas económicas.</li>
+                            <li>Problemas con <strong class="keyword">pagos con tarjeta</strong> (prioridad del efectivo).</li>
+                            <li>Suspensión de eventos (Mutua Madrid Open) y cierre de museos (Prado, Reina Sofía).</li>
+                        </ul>
+                    </div>
+                    <div class="info-box info-box-green">
+                         <h3 style="font-size: 25px;"><span class="icon">🏛️</span> Respuesta Gubernamental</h3>
+                        <ul>
+                            <li>Reuniones de emergencia y activación de gabinetes de crisis.</li>
+                            <li>Activación de planes para <strong class="keyword">restablecer el suministro</strong> por fases.</li>
+                            <li>Coordinación con operadores europeos (Francia apoyó con suministro).</li>
+                            <li>Llamadas a la calma y a minimizar desplazamientos.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                 <div class="media-container grid grid-cols-1 md:grid-cols-2 gap-8 my-10"> 
+                    <figure>
+                         <div class="relative aspect-video w-full overflow-hidden rounded-lg shadow-xl"> 
+                            <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/2RWqz7WbqTM?si=e5C02lVavNDFx8IF" title="YouTube video player - APAGÓN MASIVO EN ESPAÑA Y PORTUGAL | ÚLTIMA HORA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <figcaption class="media-caption">Última hora del apagón masivo por Antena 3 Noticias (YouTube).</figcaption>
+                    </figure>
+                     <figure>
+                         <div class="relative aspect-video w-full overflow-hidden rounded-lg shadow-xl">
+                            <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/Ny79zaSueQ8?si=P3NJ9iPsU_13yfB_" title="YouTube video player - Apagón masivo en Europa" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <figcaption class="media-caption">Reporte del apagón en España, Francia y Portugal por RTVE Noticias (YouTube).</figcaption>
+                    </figure>
+                </div>
+            </section>
+            <!-- FIN SECCIÓN IMPACTO GENERALIZADO -->
+            <hr>
+            <br>
+            <!-- SECCIÓN RESTABLECIMIENTO -->
+            <section class="mb-12">
+                <h2 style="font-size: 32px;"><svg class="icon text-primary-DEFAULT dark:text-primary-dark" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" /></svg>El Proceso de <span class="keyword ml-2">Restablecimiento</span></h2>
+                <p class="mb-5">
+                    <strong class="keyword">Red Eléctrica (REE)</strong> activó inmediatamente los procedimientos para la <strong class="keyword">reposición del servicio</strong>. Este es un proceso complejo que implica:
+                </p>
+                <ul class="mb-6">
+                    <li><strong class="keyword">Arranque de 'negro':</strong> Iniciar la generación eléctrica desde cero en centrales específicas capaces de hacerlo sin alimentación externa.</li>
+                    <li><strong class="keyword">Creación de 'islas':</strong> Energizar gradualmente pequeñas áreas de la red alrededor de estas centrales.</li>
+                    <li><strong class="keyword">Sincronización:</strong> Conectar estas 'islas' entre sí y, finalmente, reconectar el sistema peninsular con la red europea.</li>
+                    <li><strong class="keyword">Priorización:</strong> Dar prioridad a servicios esenciales (hospitales, infraestructuras críticas) durante la recuperación.</li>
+                </ul>
+                 <div class="graphic-placeholder">
+                   <img src="https://files.lafm.com.co/assets/public/styles/16x9/public/2025-04/apagonmadrid.jpg?VersionId=z_HtZ49bPZT5zb2URGGK7K.DbUvrIkp.&itok=rxIZkg0Z" alt="">
+                    <br><small class="mt-2">Madrid, España, durante el apagón del 28 de abril</small>
+                 </div>
+                <p class="mt-6">
+                    El tiempo estimado inicial para la recuperación total se situó <strong class="keyword">entre 6 y 10 horas</strong>. Horas después del inicio del apagón, ya se había recuperado cerca del 50% del suministro, comenzando por el norte y sur peninsular. La coordinación entre REE, el gobierno, y otros operadores europeos fue crucial.
+                </p>
+            </section>
+
+            <!-- SECCIÓN LECCIONES APRENDIDAS -->
+            <section
+                class="mb-12 bg-blue-100 dark:bg-gray-800/50 p-6 md:p-8 rounded-lg border border-blue-200 dark:border-info-dark/30 shadow-inner">
+                <h2 style="font-size: 32px;" class="text-blue-900 dark:text-info-light"><svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>Lecciones Aprendidas: Preparación y <span class="keyword ml-2">Resiliencia Energética</span></h2>
+                <p class="mb-5 text-blue-800 dark:text-blue-200">
+                    Este evento subraya la vulnerabilidad de nuestras sociedades ante fallos en la <strong
+                        class="keyword">infraestructura eléctrica</strong>. Si bien las causas aún se investigan, la necesidad de
+                    <strong class="keyword">preparación individual y colectiva</strong> es evidente.
+                </p>
+                <h3 style="font-size: 32px;" class="subsection-title text-blue-700 dark:text-info-light">☀️ La Oportunidad del <span
+                        class="keyword">Autoconsumo Solar</span></h3>
+                <p class="mb-5 text-blue-800 dark:text-blue-200">
+                    La dependencia de la red eléctrica centralizada queda patente en estos eventos. El <strong
+                        class="keyword">autoconsumo solar</strong>, especialmente combinado con sistemas de <strong
+                        class="keyword">almacenamiento (baterías)</strong>, emerge como una solución clave para la <strong
+                        class="keyword">resiliencia energética</strong> doméstica. Permite:
+                </p>
+                <ul class="mb-6 text-blue-800 dark:text-blue-200">
+                    <li>Mantener funcionando electrodomésticos esenciales y sistemas de comunicación.</li>
+                    <li>Garantizar la seguridad (alarmas, iluminación).</li>
+                    <li>Reducir la factura eléctrica y la huella de carbono a largo plazo.</li>
+                </ul>
+                <div class="graphic-placeholder">
+                   <img src="https://i0.wp.com/hondurasairportnews.com/wp-content/uploads/2025/04/portada-apagon-en-espana.jpg?fit=1200%2C675&ssl=1" alt="">
+                   <p>Apagón Europa 2025: España, Portugal y Francia a Oscuras</p>
+                </div>
+
+                <h3 style="font-size: 32px;" class="subsection-title text-blue-700 dark:text-info-light">✅ Kit Básico de Emergencia</h3>
+                <p class="mb-5 text-blue-800 dark:text-blue-200">Además de soluciones energéticas, es vital tener un kit básico:</p>
+                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-blue-800 dark:text-blue-200">
+                    <li>🥫 Alimentos no perecederos</li>
+                    <li>💧 Agua embotellada</li>
+                    <li>🔦 Linternas y pilas/baterías</li>
+                    <li>🩹 Botiquín de primeros auxilios</li>
+                    <li>💵 Dinero en efectivo</li>
+                    <li>📝 Contactos de emergencia en papel</li>
+                    <li>📻 Radio a pilas</li>
+                </ul>
+                 <p class="mt-6 font-semibold text-blue-900 dark:text-blue-100">
+                    Estar preparados no solo mitiga el impacto de un <strong class="keyword">apagón</strong>, sino que fomenta una mayor conciencia sobre nuestro consumo y las alternativas energéticas sostenibles.
+                </p>
+            </section>
+
+
+            
+<!-- Sección Mejorada: Panorama Eléctrico Europeo -->
+<section class="section-divider font-serif">
+    <h2 class="text-3xl lg:text-4xl font-bold font-sans mb-8 pb-4 border-b border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 flex items-center">
+      <svg class="icon text-primary-DEFAULT dark:text-primary-dark" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 mr-3"> <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /> </svg>
+      Panorama Actual del Sistema Eléctrico en Europa
+    </h2>
+  
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 mb-8">
+      <div>
+        <h4 class="text-xl lg:text-2xl font-semibold font-sans mb-4 text-gray-800 dark:text-gray-200">🏢 Empresas y Operadores Clave</h4>
+        <ul class="list-none space-y-4">
+          <li class="flex items-start">
+            <span class="mr-3 text-green-500 dark:text-green-400 text-xl pt-1">✅</span>
+            <span><strong>Red Eléctrica de España (REE):</strong> Operador del sistema eléctrico español, gestiona más de 45.000 km de líneas de alta tensión y más de 700 subestaciones. <a href="https://www.ree.es/es/operacion/sistema-electrico" target="_blank" class="source-link">Fuente</a></span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3 text-green-500 dark:text-green-400 text-xl pt-1">✅</span>
+            <span><strong>Endesa:</strong> Empresa española propiedad en un 70% de la italiana Enel, opera en generación, distribución y comercialización de electricidad y gas natural. <a href="https://www.endesa.com/es/prensa/sala-de-prensa/noticias/informacion-economica/endesa-eleva-inversion-2025-hasta-8600-millones-para-crecer-renovables-electrificacion" target="_blank" class="source-link">Fuente</a></span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3 text-green-500 dark:text-green-400 text-xl pt-1">✅</span>
+            <span><strong>Iberdrola:</strong> Multinacional española líder en energías renovables, con presencia en Europa, América y Asia. <a href="https://www.iberdrola.com/conocenos/nuestra-empresa/energias-renovables" target="_blank" class="source-link">Fuente</a></span>
+          </li>
+        </ul>
+      </div>
+  
+      <div>
+        <h4 class="text-xl lg:text-2xl font-semibold font-sans mb-4 text-gray-800 dark:text-gray-200">⚡ Tipos de Energía y Generación</h4>
+        <ul class="list-none space-y-4">
+          <li class="flex items-start">
+             <span class="mr-3 text-green-500 dark:text-green-400 text-xl pt-1">✅</span>
+             <span><strong>España:</strong> Más del 50% de la generación eléctrica proviene de fuentes renovables como solar, eólica, hidráulica y biomasa. <a href="https://as.com/actualidad/sociedad/como-se-abastece-espana-y-cuales-son-las-empresas-que-sirven-electricidad-a-todo-el-pais-n/" target="_blank" class="source-link">Fuente</a></span>
+          </li>
+          <li class="flex items-start">
+             <span class="mr-3 text-green-500 dark:text-green-400 text-xl pt-1">✅</span>
+             <span><strong>Portugal:</strong> Alcanzó un 81,2% de generación renovable en febrero de 2025, impulsada por contratos PPA y nuevas leyes de comunidades energéticas. <a href="https://energiaestrategica.es/los-contratos-ppa-estan-transformando-el-sector-renovable-en-portugal/" target="_blank" class="source-link">Fuente</a></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 mb-8">
+      <div>
+        <h4 class="text-xl lg:text-2xl font-semibold font-sans mb-4 text-gray-800 dark:text-gray-200">🔄 Transporte y Conexiones Transfronterizas</h4>
+        <ul class="list-none space-y-4">
+          <li class="flex items-start">
+            <span class="mr-3 text-green-500 dark:text-green-400 text-xl pt-1">✅</span>
+            <span><strong>Interconexiones:</strong> España y Portugal están conectadas eléctricamente, pero la limitada conexión de España con el resto de Europa ha sido criticada por su vulnerabilidad. <a href="https://elpais.com/economia/2025-04-28/las-energeticas-se-coordinan-con-red-electrica-para-la-restauracion-del-sistema-estamos-actuando-donde-y-cuando-nos-va-indicando.html" target="_blank" class="source-link">Fuente</a></span>
+          </li>
+        </ul>
+      </div>
+  
+      <div>
+        <h4 class="text-xl lg:text-2xl font-semibold font-sans mb-4 text-gray-800 dark:text-gray-200">📜 Regulaciones y Planes de Emergencia</h4>
+        <ul class="list-none space-y-4">
+          <li class="flex items-start">
+            <span class="mr-3 text-green-500 dark:text-green-400 text-xl pt-1">✅</span>
+            <span><strong>Plan de Preparación ante Riesgos (PPR):</strong> España activó este plan tras un apagón masivo en abril de 2025. <a href="https://www.infobae.com/espana/2025/03/25/el-plan-de-emergencia-multirriesgo-que-espana-ya-tiene-puesto-en-marcha-y-otros-kits-de-supervivencia-para-lugares-peligrosos-agua-luz-y-refugio/" target="_blank" class="source-link">Fuente</a></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+ 
+    <div class="mt-8">
+      <h4 class="text-xl lg:text-2xl font-semibold font-sans mb-4 text-gray-800 dark:text-gray-200">🚨 Eventos Recientes</h4>
+      <p class="text-justify"> {/* Texto justificado */}
+          El 28 de abril de 2025, un apagón masivo afectó a la península ibérica, dejando sin electricidad a gran parte de España y Portugal.
+          El incidente fue provocado por una oscilación extrema en el flujo de potencia en las redes, resultando en la desconexión del sistema
+          eléctrico peninsular del resto de Europa.
+          <a href="https://elpais.com/economia/2025-04-28/apagon-electrico-masivo-en-espana-portugal.html" target="_blank" rel="noopener noreferrer" class="source-link ml-1"> 
+              Leer más en El País →
+          </a>
+          <br>
+      </p>
+      <br>
+    </div>
+  </section>
+  <!-- Fin Sección Panorama Eléctrico -->
+
+<hr><br>
+<br>
+
+<section class="mb-12 section-divider">
+    <h2 style="font-size: 32px;">
+        <svg class="icon text-danger-DEFAULT dark:text-danger-light" xmlns="http://www.w3.org/2000/svg" fill="none" 
+            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" 
+                d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.008v.008H12v-.008Z" />
+        </svg>
+        <strong class="text-danger-DEFAULT dark:text-danger-light">Impacto Profundo: Consecuencias y Reflexiones</strong>
+    </h2>
+    <br>
+    <p class="mb-5">
+        El <strong class="keyword">apagón masivo</strong> del <strong class="keyword">28 de abril de 2025</strong> es un recordatorio alarmante de 
+        nuestra <strong class="keyword">dependencia tecnológica</strong>. Si bien estos eventos han ocurrido antes en regiones específicas, la 
+        magnitud y el alcance global de este incidente han dejado en evidencia cuán <strong class="keyword">frágil</strong> es nuestro sistema 
+        interconectado. ⚡🌍
+    </p>
+
+    <h3 style="font-size: 32px;" class="subsection-title">😨 Histeria Colectiva y Angustia Social</h3>
+    <p class="mb-5">
+        La incertidumbre ante un evento de gran magnitud genera <strong class="keyword">miedo y ansiedad</strong>. La falta de información clara 
+        y coordinada por parte de las autoridades agrava la histeria colectiva. Las redes sociales, aunque útiles, también se convierten en 
+        caldo de cultivo para rumores y <strong class="keyword">noticias falsas (fake news)</strong>, aumentando el pánico y dificultando la 
+        gestión de la crisis. 📢💥
+    </p>
+
+    <h3 style="font-size: 32px;" class="subsection-title">💔 Salud: Impacto en Grupos Vulnerables</h3>
+    <p class="mb-5">
+        Las personas con condiciones preexistentes como <strong class="keyword">problemas cardíacos, hipertensión y dependencia de equipos médicos</strong> 
+        enfrentan riesgos elevados. Aunque los hospitales activaron <strong class="keyword">sistemas de respaldo</strong>, la saturación inicial y la 
+        posibilidad de un apagón prolongado ponen en jaque la atención crítica. Sin acceso continuo a dispositivos médicos electrónicos, el 
+        <strong class="keyword">colapso hospitalario</strong> es una amenaza real. 🚑⚠️
+    </p>
+
+    <h3 style="font-size: 32px;" class="subsection-title">🚗 Transporte y Comunicación: Un Mundo Desconectado</h3>
+    <p class="mb-5">
+        La falta de electricidad afecta gravemente los sistemas de transporte: <strong class="keyword">semáforos inactivos</strong> generando caos 
+        vehicular, <strong class="keyword">colapso ferroviario</strong> y de metro, y suspensión o retraso de vuelos. Además, la caída de las 
+        <strong class="keyword">redes de telecomunicaciones</strong> (internet, datos móviles) impide la coordinación efectiva entre ciudadanos, 
+        servicios de emergencia y autoridades. 🚉📴
+    </p>
+
+    <h3 style="font-size: 32px;" class="subsection-title">📚 Educación y Niños: Un Futuro Detenido</h3>
+    <p class="mb-5">
+        Escuelas y universidades paralizan sus actividades, afectando el aprendizaje de millones de estudiantes. La interrupción del acceso a 
+        plataformas educativas online y recursos digitales deja a los estudiantes, especialmente a los niños habituados a la vida digital, 
+        <strong class="keyword">desconectados del conocimiento</strong>. 🎒📴
+    </p>
+
+    <h3 style="font-size: 32px;" class="subsection-title">💰 Impacto Económico: Caída Comercial y Pérdidas Millonarias</h3>
+    <p class="mb-5">
+        Un apagón de esta magnitud frena bruscamente la actividad económica. <strong class="keyword">Empresas tecnológicas, bancos, comercios</strong> 
+        y la industria en general sufren <strong class="keyword">pérdidas significativas</strong>. Los problemas con los <strong class="keyword">pagos electrónicos</strong> 
+        paralizan transacciones, y la interrupción de servicios digitales esenciales genera una crisis que puede prolongarse más allá del 
+        restablecimiento del suministro. La <strong class="keyword">caída en bolsa</strong> y la parálisis de industrias automatizadas son 
+        consecuencias inevitables. 📉🏢
+    </p>
+</section>
+
+<hr>
+<br>
+             <!-- SECCIÓN REFLEXIÓN TECNOLOGÍA -->
+             <section class="mb-12 section-divider">
+              <h2 style="font-size: 32px;"><svg class="icon text-primary-DEFAULT dark:text-primary-dark" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z" /></svg><strong class="ml-1">Reflexión: Nuestra Dependencia Tecnológica</strong></h2>
+              <p class="mb-5">La tecnología ha facilitado enormemente la vida moderna, pero este evento demuestra de forma cruda que <strong class="keyword">nos ha puesto a su merced</strong>. Sin electricidad, sin energía constante y fiable, y sin los servicios digitales asociados, <strong class="keyword">el mundo moderno, tal como lo conocemos, se detiene</strong>. Hemos construido una compleja infraestructura automatizada y digitalizada, pero a menudo sin planes de contingencia robustos o alternativas viables ante colapsos sistémicos globales. 🔌🛑</p>
+              <h3 style="font-size: 32px;" class="subsection-title">🛡️ Amenaza Cibernética y el Riesgo de la IA Malintencionada</h3>
+              <p class="mb-5">La creciente sofisticación de la <strong class="keyword">inteligencia artificial (IA)</strong> y la interconexión global plantean nuevos y significativos riesgos. La posibilidad de que grupos malintencionados o incluso estados-nación utilicen <strong class="keyword">IA para orquestar ciberataques</strong> [Fuentes 8, 9, 12, 16, 17, 23-26, 28] contra <strong class="keyword">infraestructuras críticas</strong> (redes eléctricas, sistemas financieros, comunicaciones) es una amenaza real y creciente. Si estas herramientas caen en manos equivocadas o se desarrollan con fines hostiles, la estabilidad mundial podría verse gravemente comprometida. ⚠️💻</p>
+              <h3 style="font-size: 32px;" class="subsection-title">⚡ Falta de Planificación y Vulnerabilidad Energética</h3>
+              <p class="mb-5">La dependencia de una <strong class="keyword">única fuente de energía predominante</strong> o de redes altamente centralizadas hace a muchos países y regiones extremadamente vulnerables a apagones prolongados. La falta de inversión en <strong class="keyword">mantenimiento, modernización</strong> [Fuente 33] y <strong class="keyword">diversificación energética</strong> agrava el problema. En lugares como la <strong class="keyword">República Dominicana</strong>, los apagones, aunque generalmente más localizados, son un problema recurrente y un ejemplo de cómo deficiencias en la gestión, falta de inversión estratégica y problemas estructurales (a veces ligados a la corrupción) pueden comprometer la seguridad energética de una nación. 🔋🇩🇴</p>
+            </section>
+
+            <hr>
+            <br>
+            <!-- SECCIÓN SOLUCIONES -->
+             <section class="mb-12 section-divider">
+              <h2 style="font-size: 32px;"><svg class="icon text-success-DEFAULT dark:text-success-light" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.354a15.057 15.057 0 0 1-4.5 0m3.75-12.013a15.057 15.057 0 0 1 4.5 0m-3.75 2.354a12.06 12.06 0 0 1 4.5 0m-3.75 5.125a6.01 6.01 0 0 1 1.5-.189m-1.5.189a6.01 6.01 0 0 0-1.5-.189m3.75 7.478a12.06 12.06 0 0 0 4.5 0m-3.75 2.354a15.057 15.057 0 0 0 4.5 0m-3.75-12.013a15.057 15.057 0 0 0-4.5 0m3.75 2.354a12.06 12.06 0 0 0-4.5 0m-3.75 5.125a6.01 6.01 0 0 0-1.5-.189m1.5.189a6.01 6.01 0 0 1-1.5-.189m0 0A21.034 21.034 0 0 0 3 12.75m18 0a21.034 21.034 0 0 1-3.75 5.125m-10.5 0a21.034 21.034 0 0 1-3.75-5.125m18 0a21.034 21.034 0 0 0-3.75-5.125m-10.5 0a21.034 21.034 0 0 0-3.75 5.125" /></svg><strong class="ml-1">Soluciones y Llamado a la Acción Urgente</strong></h2>
+              <p class="mb-5">El <strong class="keyword">apagón del 28 de abril de 2025</strong> no debe ser solo una noticia pasajera, sino un catalizador para un cambio profundo en la manera en que concebimos y gestionamos la energía y la tecnología a nivel global. Las soluciones deben ser implementadas con urgencia y visión a largo plazo: 🚀🔬</p>
+              <h3 style="font-size: 32px;" class="subsection-title">🔄 Diversificación y Descentralización Energética</h3>
+              <p class="mb-5">Invertir masivamente en un <strong class="keyword">mix energético robusto</strong> que incluya <strong class="keyword">fuentes renovables</strong> (solar, eólica, geotérmica) [Fuentes 2, 62, 64-66, 71, 73] y energías alternativas, pero también manteniendo y modernizando fuentes estables de base. Fomentar la <strong class="keyword">generación distribuida</strong> y las microrredes para reducir la dependencia de un único sistema centralizado. 🌞💨💧</p>
+              <h3 style="font-size: 32px;" class="subsection-title">🔒 Ciberseguridad Avanzada y Resiliente</h3>
+              <p class="mb-5">Elevar drásticamente los estándares y la inversión en <strong class="keyword">ciberseguridad</strong> para infraestructuras críticas. Desarrollar sistemas de <strong class="keyword">defensa digital proactivos</strong>, con capacidad de detección temprana, respuesta rápida y recuperación ante incidentes, incluyendo la protección contra ataques basados en IA. 🛡️🔍</p>
+              <h3 style="font-size: 32px;" class="subsection-title">🏗️ Infraestructuras Híbridas y Modernizadas</h3>
+              <p class="mb-5">Diseñar e implementar <strong class="keyword">infraestructuras energéticas y de comunicaciones más resilientes</strong>, capaces de operar en modo degradado o aislado durante emergencias. Incorporar tecnologías modernas (<strong class="keyword">smart grids</strong>) pero manteniendo <strong class="keyword">sistemas analógicos o tradicionales de respaldo</strong> que no dependan exclusivamente de la conectividad digital. Invertir en el mantenimiento preventivo y la modernización de las redes existentes [Fuente 33, 65]. ⚙️🔋</p>
+              <h3 style="font-size: 32px;" class="subsection-title">📢 Conciencia Social, Preparación y Resiliencia Comunitaria</h3>
+              <p class="mb-5">Educar a la población sobre los riesgos y cómo actuar responsablemente en <strong class="keyword">casos de emergencia</strong> (tener kits básicos [Fuente 74], planes familiares, uso racional de recursos). Fomentar activamente el <strong class="keyword">autoconsumo energético</strong> [Fuentes 51, 71-73] y las soluciones de almacenamiento a nivel doméstico y comunitario. Promover la <strong class="keyword">resiliencia comunitaria</strong> y la cooperación vecinal. 🧑‍🏫🔦🏘️</p>
+            </section>
+
+            <hr>
+            <br>
+             <!-- SECCIÓN OPINIONES EXPERTOS -->
+            <section class="mb-12 section-divider">
+                <h2 style="font-size: 32px;"><svg class="icon text-primary-DEFAULT dark:text-primary-dark" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg><strong class="ml-1">Opiniones de Expertos y Análisis</strong></h2>
+                <p class="mb-5">
+                    El debate sobre las causas sigue abierto. Analistas de ciberseguridad consultados por diversos medios [Fuentes 9, 12, 16, 23-26] consideran <strong class="keyword">"muy probable" o "no descartable"</strong> un ataque digital coordinado, dada la escala del evento. Otros expertos [Fuentes 20, 30, 33] apuntan a <strong class="keyword">fallos técnicos en cascada</strong>, posiblemente exacerbados por la alta demanda energética debida a condiciones climáticas extremas y una posible falta de mantenimiento o modernización de la infraestructura. La investigación oficial conjunta entre España, Portugal y la UE será clave para determinar la causa raíz.
+                </p>
+                <a href="https://www.youtube.com/watch?v=YoXE4LXFflU"
+                   class="inline-flex items-center bg-danger-DEFAULT text-white px-6 py-3 rounded-lg hover:bg-danger-light dark:bg-danger-dark dark:text-red-950 dark:hover:bg-danger-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-danger-DEFAULT dark:focus:ring-offset-gray-950 transition-all duration-300 ease-in-out text-base font-semibold font-ui shadow-md hover:shadow-lg transform hover:-translate-y-1"
+                   target="_blank" rel="noopener noreferrer">
+                    <svg class="icon -ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9A2.25 2.25 0 0 0 4.5 18.75Z" /></svg>
+                    Video Análisis: ¿Ciberataque o Fallo Técnico?
+                </a>
+            </section>
+
+            
+
+            <hr>
+            <br>
+            <!-- SECCIÓN FUENTES -->
+            <section class="mb-12 section-divider">
+                <h2 style="font-size: 32px;"><svg class="icon text-primary-DEFAULT dark:text-primary-dark" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" /></svg><strong class="ml-1">🔍 Más Información y Fuentes Adicionales</strong></h2>
+                <p class="mb-5 text-base text-gray-600 dark:text-gray-400 font-ui">
+                    Para un seguimiento detallado del evento y análisis adicionales, consulta las siguientes fuentes oficiales y medios confiables:
+                </p>
+                <ul class="list-outside ml-6 space-y-3 text-base font-ui">
+                    <li><a href="https://www.lanacion.com.ar/el-mundo/el-apagon-en-espana-se-debe-a-un-posible-ciberataque-nid28042025/" class="source-link" target="_blank" rel="noopener noreferrer">📌 La Nación (Argentina): "¿El apagón en España se debe a un posible ciberataque?"</a></li>
+                    <li><a href="https://www.rtve.es/noticias/20250428/apagon-masivo-sin-luz-espana-analiza-causas/" class="source-link" target="_blank" rel="noopener noreferrer">📌 RTVE (España): "Apagón masivo sin luz en España: se analizan las causas"</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=hV6VlTolpU4" class="source-link" target="_blank" rel="noopener noreferrer">📺 La Nación TV (Video Análisis)</a></li>
+                    <li><a href="https://www.elespanol.com/invertia/empresas/energia/20250428/cero-energetico-dejado-espana-sin-luz-procedimiento-seguir-recuperar-suministro/1003743733818_0.html" class="source-link" target="_blank" rel="noopener noreferrer">📌 El Español / Invertia: "El 'cero energético' que afectó a España"</a></li>
+                    <li><a href="https://elpais.com/espana/2025-04-28/el-brutal-apagon-con-datos-y-graficos-en-tiempo-real.html" class="source-link" target="_blank" rel="noopener noreferrer">📊 El País: "El brutal apagón con datos y gráficos en tiempo real"</a></li>
+                    <li><a href="https://cnnespanol.cnn.com/mundo/live-news/ultima-hora-apagon-espana-portugal-trax" class="source-link" target="_blank" rel="noopener noreferrer">📌 CNN en Español: "Apagón masivo afecta a España, Portugal y partes de Francia"</a></li>
+                    <li><a href="https://dfsud.com/america/grandes-zonas-de-espana-portugal-y-francia-sufren-cortes-de-electricidad" class="source-link" target="_blank" rel="noopener noreferrer">📌 Reuters / DF Sud: "Grandes zonas de España, Portugal y Francia sufren cortes de electricidad"</a></li>
+                    <li><a href="https://blog.ecoflow.com/es/apagon-2025/" class="source-link" target="_blank" rel="noopener noreferrer">📌 EcoFlow Blog ES: "Apagón mundial 2025: ¿cómo prepararnos?"</a></li>
+                    <li><a href="https://www.cronista.com/espana/actualidad-es/corte-de-luz-masivo-en-toda-espana-francia-y-portugal-que-sucedio/" class="source-link" target="_blank" rel="noopener noreferrer">📌 El Cronista: "Corte de luz masivo en toda España, Francia y Portugal: ¿Qué sucedió?"</a></li>
+                    <li><a href="https://www.infobae.com/espana/2025/04/28/espana-francia-y-portugal-investigan-el-origen-del-apagon-sospechas-de-un-ciberataque/" class="source-link" target="_blank" rel="noopener noreferrer">📌 Infobae: "España, Francia y Portugal investigan el origen del apagón: ¿ciberataque?"</a></li>
+                    <li><a href="https://www.nmas.com.mx/internacional/europa/fotos-apagon-masivo-europa-2025-asi-se-vivio-corte-de-luz-espana-otros-paises/" class="source-link" target="_blank" rel="noopener noreferrer">📸 N+: "Galería: Así se vive el apagón masivo en Europa"</a></li>
+                    <li><a href="https://www.mendozapost.com/mundo/apagon-europa-posible-ciberataque/" class="source-link" target="_blank" rel="noopener noreferrer">📌 Mendoza Post: "Gran apagón en Europa: ¿fue un ciberataque?"</a></li>
+                    <li><a href="https://jjproducciones.com.co/blog/ultima-hora-espana-y-portugal-enfrentan-gran-apagon/" class="source-link" target="_blank" rel="noopener noreferrer">📌 JJ Producciones: "Gran apagón masivo afecta a España y Portugal en abril de 2025"</a></li>
+                    <li><a href="https://www.emol.com/noticias/Internacional/2025/04/28/1164771/apagon-portugal-espana-causas-ciberataque.html" class="source-link" target="_blank" rel="noopener noreferrer">📌 Emol: "Unión Europea contradice tesis de ciberataque en apagón que sacude a Portugal y España"</a></li>
+                    <li><a href="https://www.kienyke.com/mundo/el-apagon-en-europa-fue-producto-de-un-ciberataque-esto-se-sabe" class="source-link" target="_blank" rel="noopener noreferrer">📌 KienyKe: "¿El apagón en Europa fue producto de un ciberataque? Esto se sabe"</a></li>
+                </ul>
+            </section>
+
+        <!-- FOOTER -->
+<footer class="flex flex-col items-center justify-center text-center text-gray-500 dark:text-gray-500 text-base mt-16 pt-8 border-t border-gray-300 dark:border-gray-700 font-ui w-full">
+    <p>© 2025 Análisis del Apagón Masivo. La información refleja la situación conocida hasta el 28 de abril de 2025.</p>
+    <p class="font-semibold mt-2 text-lg text-gray-700 dark:text-gray-300">
+        Este suceso marca un antes y un después en nuestra relación con la tecnología. 
+        <strong class="dark:text-yellow-300">Es hora de actuar.</strong> 🌍🔧
+    </p>
+</footer>
+
+        </article>
+
+    </div>
+
+    <!-- Script para Modo Oscuro -->
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const sunIcon = document.getElementById('sunIcon');
+        const moonIcon = document.getElementById('moonIcon');
+        const htmlElement = document.documentElement;
+
+        const applyTheme = (theme) => {
+            localStorage.setItem('theme', theme);
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                moonIcon.classList.remove('hidden'); // Mostrar luna en modo oscuro
+                sunIcon.classList.add('hidden');    // Ocultar sol
+            } else {
+                htmlElement.classList.remove('dark');
+                sunIcon.classList.remove('hidden');  // Mostrar sol en modo claro
+                moonIcon.classList.add('hidden');   // Ocultar luna
+            }
+        };
+
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        let currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+
+        applyTheme(currentTheme); // Aplicar tema al cargar
+
+        darkModeToggle.addEventListener('click', () => {
+            const newTheme = htmlElement.classList.contains('dark') ? 'light' : 'dark';
+            applyTheme(newTheme);
+        });
+
+        // Opcional: Escuchar cambios del sistema si no hay preferencia guardada
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (!localStorage.getItem('theme')) {
+                applyTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+    </script>
+
+</body>
+</html>
